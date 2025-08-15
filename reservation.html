@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House of Mottle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        font-family: "Lexend", sans-serif;
+        scroll-behavior: smooth;
+        background-color: #2B1B0A;
+    }
+
+    .lexend {
+        font-family: "Lexend", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 100,200,300,400,500,600,700,800,900;
+        font-style: normal;
+      }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        word-break: keep-all;
+    }
+
+      /* HEADER */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100vw;
+        padding: 1.2em 1.5em;
+        box-sizing: border-box;
+        z-index: 9999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        backface-visibility: hidden; /* flicker 방지 */
+        transform: translateZ(0);
+        backdrop-filter: blur(4px);
+    }
+
+    /* 로고 */
+    .r-header img {
+        width: 60px;
+        height: auto;
+    }
+
+    /* MENU 텍스트 + 햄버거 아이콘 */
+    .l-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .l-header p {
+        color: #F47820;
+        font-size: 18px;
+    }
+
+    /* 햄버거 메뉴 체크박스 (숨김) */
+    input#menuicon {
+        display: none;
+    }
+
+    /* 햄버거 아이콘 스타일 */
+    .menu-label {
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+        z-index: 2001;
+        transition: all 0.35s ease;
+    }
+
+    .menu-label span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #F47820;
+        transition: all 0.3s ease;
+    }
+
+    .menu-label span:nth-child(1) {
+        top: 0;
+    }
+    .menu-label span:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .menu-label span:nth-child(3) {
+        bottom: 0;
+    }
+
+    /* 햄버거 클릭 시 X 모양 */
+    input#menuicon:checked ~ .sidebar {
+        right: 0;
+    }
+
+    /* 사이드바가 열릴 때 메뉴 아이콘만 사이드바 왼쪽으로 이동 */
+    input#menuicon:checked ~ .header .menu-label {
+        position: fixed;
+        right: 190px;
+        top: 1.5em;
+        z-index: 2002;
+    }
+
+    input#menuicon:checked ~ .header .menu-label span {
+        background: #F47820;
+    }
+
+    input#menuicon:checked ~ .header .menu-label span:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+    input#menuicon:checked ~ .header .menu-label span:nth-child(2) {
+        opacity: 0;
+    }
+    input#menuicon:checked ~ .header .menu-label span:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+    }
+
+:root { --sidebar-w: 180px; }
+
+.sidebar{
+  width: var(--sidebar-w) !important;
+  box-sizing: border-box !important;
+  padding: 0.8em 1em;
+  position: fixed;
+  top: 0;
+  bottom: 0; 
+  right: calc(-1 * var(--sidebar-w));  /* 기본: 화면 밖으로 숨김 */
+  background: #F47820;
+  color: #fff;
+  z-index: 99999;
+  transition: right .35s ease;
+}
+
+input#menuicon:checked ~ .sidebar{
+  right: 0 !important;
+}
+
+input#menuicon:checked ~ .header .menu-label{
+  position: fixed;
+  right: calc(var(--sidebar-w) + 5px) !important;
+  top: 1.5em;
+  z-index: 2002;
+}
+
+@supports (height: 100dvh){
+  .sidebar{ min-height: 100dvh; }
+}
+
+
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar li {
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    .sidebar a {
+        color: white;
+        font-size: 18px;
+        pointer-events: auto;
+        z-index: 100000;
+    }
+
+    .content1 {
+        padding: 5em 1.5em 3em;
+        /*text-align: center;*/
+        z-index: 2;
+    }
+
+ 
+    .title-1 p {
+        font-size: 48px;
+        line-height: 0.9;
+        font-family: "Lexend", sans-serif;
+        font-weight: 700;
+        color: #F47820;
+        margin: 0.2em 0;
+    }
+
+    /*예약폼*/
+    .booking-form {
+    max-width: 600px;
+    margin: 5vh auto;
+    color: white;
+    font-family: "Lexend", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+  .booking-form label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    display: block;
+  }
+
+  .booking-form input[type="text"],
+  .booking-form input[type="email"],
+  .booking-form textarea {
+    width: 100%;
+    padding: 1.2em 1em;
+    font-size: 16px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+  }
+
+  .booking-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .booking-form .radio-group {
+    display: flex;
+    gap: 2em;
+    margin-top: 0.5em;
+  }
+
+  .booking-form button {
+    background-color: #f47820;
+    color: white;
+    font-size: 16px;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .artist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75em;
+  }
+
+  .artist-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em;
+    background-color: #eee;
+    color: #000;
+    cursor: pointer;
+    border: 2px solid transparent;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .artist-option:hover {
+    background-color: #f47820;
+    color: white;
+  }
+
+  .artist-option.selected {
+    background-color: #f47820;
+    color: white;
+  }
+
+  .artist-option input[type="checkbox"] {
+    display: none;
+  }
+</style>
+
+
+</head>
+
+<body>
+
+  <!-- 햄버거 메뉴 체크박스를 맨 위로 이동 -->
+  <input type="checkbox" id="menuicon" hidden>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="r-header">
+        <a href="index.html"><img src="resource/logo.png"></a>
+    </div>
+    <div class="l-header">
+      <p>MENU</p>
+      <label for="menuicon" class="menu-label">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 사이드바 -->
+  <div class="sidebar">
+    <ul>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="Artist.html">ARTIST</a></li>
+      <li><a href="reservation.html">RESERVATION</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+
+  <!-- 본문 -->
+  <div class="content1">
+    
+    <!-- 배경 이미지 슬라이드쇼 -->
+    <div class="background-slideshow">
+    <div class="background-slide active"></div>
+    <div class="background-slide"></div>
+    <div class="background-slide"></div>
+    <div class="background-slide"></div>
+    <div class="background-slide"></div>
+    <div class="background-slide"></div>
+    <div class="background-slide"></div>
+    </div>
+    
+    <div class="title-1">
+      <p>BOOKING</p>
+      <p>FORM</p>
+      <p style="font-size: 15px; line-height: 1.5; font-weight: 300; padding-top:1em;">Customers must be at least 18 years old (international age) to get a tattoo.</p>
+    </div>
+
+
+    <form id="contact-form" class="booking-form">
+      <div>
+        <label>Name (required)</label>
+        <input type="text" name="name" placeholder="Enter name" required />
+      </div>
+    
+      <div>
+        <label>E-mail address (required)</label>
+        <input type="email" name="email" placeholder="Enter e-mail address" required />
+      </div>
+  
+    
+      <div>
+        <label>Do you need artist recommendation?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="recommendation" value="Yes" required /> Yes</label>
+          <label><input type="radio" name="recommendation" value="No" required /> No</label>
+        </div>
+      </div>
+    
+      <div>
+        <label>Choose an artist<span style="font-weight: normal;"></span></label>
+        <div class="artist-grid">
+          <label class="artist-option"><input type="checkbox" name="artists" value="EVEN" /> EVEN</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="EJ" /> EJ</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="MIDAM" /> MIDAM</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="MOONY" /> MOONY</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="CHAMSAE" /> CHAMSAE</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="JOOIN" /> JOOIN</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="BLAIRE" /> BLAIRE</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="SERAPH" /> SERAPH</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="KAMO" /> KAMO</label>
+          <label class="artist-option"><input type="checkbox" name="artists" value="none" /> none</label>
+        </div>
+      </div>
+      
+      <div>
+        <label>Which dates do you prefer?</label>
+        <textarea name="preferred_date" placeholder="Write available dates" required></textarea>
+      </div>
+
+      <div>
+        <label>Which placement you looking for the tattoo and what size?</label>
+        <textarea name="placement" placeholder="Write a description" required></textarea>
+      </div>
+    
+      <div>
+        <label>Share your tattoo idea</label>
+        <textarea name="idea" placeholder="Write a description" required></textarea>
+      </div>
+      <p style="font-size: 15px; color: white; line-height: 1.5; font-weight: 300;"> *If you do not receive a reply within 1–2 days, please contact the artist directly.</p>
+
+      <button type="submit">Send</button>
+    </form>
+
+
+      
+</div>
+
+  
+<script>
+
+  // 폼 제출 처리
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+
+    for (let [key, value] of data.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxzISbS3CHEss-Wrr2KW6vjMY9TXB3Nln7NKjKND8g5kJvZxLfj33vnWejhpdxE_kxOUA/exec",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const result = await response.json();
+      alert(result.result === "success"
+        ? "Message sent successfully!"
+        : "Failed to send message.");
+
+      if (result.result === "success") form.reset();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error sending message.");
+    }
+  });
+
+  // 아티스트 단일 선택 기능
+  const artistOptions = document.querySelectorAll('.artist-option');
+
+  artistOptions.forEach(option => {
+    const input = option.querySelector('input');
+
+    option.addEventListener('click', (e) => {
+      e.preventDefault(); // 라벨의 기본 동작 방지
+
+      // 이미 선택된 항목을 다시 누르면 해제
+      const alreadySelected = input.checked;
+
+      // 먼저 모든 항목 초기화
+      artistOptions.forEach(other => {
+        other.querySelector('input').checked = false;
+        other.classList.remove('selected');
+      });
+
+      // 이번 클릭이 새로운 선택이면 적용
+      if (!alreadySelected) {
+        input.checked = true;
+        option.classList.add('selected');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

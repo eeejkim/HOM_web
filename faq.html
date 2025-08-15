@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House of Mottle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        font-family: "Lexend", sans-serif;
+        scroll-behavior: smooth;
+        background-color: #2B1B0A;
+    }
+
+    .lexend {
+        font-family: "Lexend", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 100,200,300,400,500,600,700,800,900;
+        font-style: normal;
+      }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        word-break: keep-all;
+        font-size: 15px;
+        font-weight: 300;
+        color: white;
+        line-height: 1.6;
+    }
+    /* HEADER */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100vw;
+        padding: 1.2em 1.5em;
+        box-sizing: border-box;
+        z-index: 9999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        backface-visibility: hidden; /* flicker 방지 */
+        transform: translateZ(0);
+        backdrop-filter: blur(4px);
+    }
+
+    /* 로고 */
+    .r-header img {
+        width: 60px;
+        height: auto;
+    }
+
+    /* MENU 텍스트 + 햄버거 아이콘 */
+    .l-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    .l-header p {
+        color: #F47820;
+        font-size: 18px;
+    }
+
+    /* 햄버거 메뉴 체크박스 (숨김) */
+    input#menuicon {
+        display: none;
+    }
+
+    /* 햄버거 아이콘 스타일 */
+    .menu-label {
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+        z-index: 2001;
+        transition: all 0.35s ease;
+    }
+
+    .menu-label span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #F47820;
+        transition: all 0.3s ease;
+    }
+
+    .menu-label span:nth-child(1) {
+        top: 0;
+    }
+    .menu-label span:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .menu-label span:nth-child(3) {
+        bottom: 0;
+    }
+
+    /* 햄버거 클릭 시 X 모양 */
+    input#menuicon:checked ~ .sidebar {
+        right: 0;
+    }
+
+    /* 사이드바가 열릴 때 메뉴 아이콘만 사이드바 왼쪽으로 이동 */
+    input#menuicon:checked ~ .header .menu-label {
+        position: fixed;
+        right: 190px;
+        top: 1.5em;
+        z-index: 2002;
+    }
+
+    input#menuicon:checked ~ .header .menu-label span {
+        background: #F47820;
+    }
+
+    input#menuicon:checked ~ .header .menu-label span:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+    input#menuicon:checked ~ .header .menu-label span:nth-child(2) {
+        opacity: 0;
+    }
+    input#menuicon:checked ~ .header .menu-label span:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+    }
+
+    :root { --sidebar-w: 180px; }
+
+.sidebar{
+  width: var(--sidebar-w) !important;
+  box-sizing: border-box !important;
+  padding: 0.8em 1em;
+  position: fixed;
+  top: 0;
+  bottom: 0; 
+  right: calc(-1 * var(--sidebar-w));  /* 기본: 화면 밖으로 숨김 */
+  background: #F47820;
+  color: #fff;
+  z-index: 99999;
+  transition: right .35s ease;
+}
+
+input#menuicon:checked ~ .sidebar{
+  right: 0 !important;
+}
+
+input#menuicon:checked ~ .header .menu-label{
+  position: fixed;
+  right: calc(var(--sidebar-w) + 5px) !important;
+  top: 1.5em;
+  z-index: 2002;
+}
+
+@supports (height: 100dvh){
+  .sidebar{ min-height: 100dvh; }
+}
+
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar li {
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    .sidebar a {
+        color: white;
+        font-size: 18px;
+        pointer-events: auto;
+        z-index: 100000;
+    }
+    /* 콘텐츠 */
+    .content1 {
+        height: 100vh;
+        padding: 5em 1.5em 3em;
+        /*text-align: center;*/
+        z-index: 2;
+    }
+
+    .title-1 {
+        padding-bottom: 1em;
+    }
+    .title-1 p {
+        font-size: 48px;
+        line-height: 0.9;
+        font-family: "Lexend", sans-serif;
+        font-weight: 700;
+        color: #F47820;
+        margin: 0.2em 0;
+    }
+/* ===== FAQ Accordion ===== */
+.faq-wrap{
+  max-width: 860px;
+  margin: 2rem 0 4rem;
+  padding-bottom: 2em;
+}
+.faq-item{
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,.1);
+  scroll-margin-top: 90px;
+}
+.faq-q{
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 1rem 1.1rem;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.faq-q .q-text{ padding-right: .8rem; }
+.faq-q .q-icon{
+  flex-shrink: 0;
+  width: 14px; height: 14px;
+  position: relative;
+}
+.faq-q .q-icon::before,
+.faq-q .q-icon::after{
+  content:"";
+  position:absolute;
+  left:0; top:50%;
+  width:100%; height:2px;
+  background:#F47820;
+  transform: translateY(-50%);
+  transition: transform .2s ease, opacity .2s ease;
+}
+.faq-q .q-icon::after{
+  transform: translateY(-50%) rotate(90deg); /* + 모양 */
+}
+.faq-item.open .faq-q .q-icon::after{
+  transform: translateY(-50%) rotate(0deg);  /* - 모양 */
+  opacity:.9;
+}
+
+.faq-a{
+  height: 0;
+  overflow: hidden;
+  transition: height .28s ease;
+  background: rgba(255,255,255,.06);
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+.faq-a-inner{
+  padding: 1rem 1.1rem;
+  color:#fff;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.q-text {
+    line-height: 1.4;
+}
+@media (max-width:520px){
+  .faq-wrap{ margin: 1rem 0 3rem; }
+}
+
+
+
+
+</style>
+
+</head>
+
+<body>
+
+  <!-- 햄버거 메뉴 체크박스를 맨 위로 이동 -->
+  <input type="checkbox" id="menuicon" hidden>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="r-header">
+        <a href="index.html"><img src="resource/logo.png"></a>
+    </div>
+    <div class="l-header">
+      <p>MENU</p>
+      <label for="menuicon" class="menu-label">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 사이드바 -->
+  <div class="sidebar">
+    <ul>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="Artist.html">ARTIST</a></li>
+      <li><a href="reservation.html">RESERVATION</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+
+  <!-- 본문 -->
+  <div class="content1">
+    
+    <div class="title-1">
+      <p>FAQ</p>
+    </div>
+    <div class="faq-wrap">
+
+        
+        <p style="font-size: 18px; padding: 10px 3px; font-weight:600; color:#F47820;">Reservation</p>
+        <!-- FAQ 1-1 -->
+        <div class="faq-item" id="faq-aftercare">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+            <span class="q-text">How can I make a reservation?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-aftercare">
+            <div class="faq-a-inner">
+                <p>
+                If you wish to book with a specific artist, the booking process may vary depending on the artist. 
+                <br><br>
+                You can use 
+                <span style="font-weight:600;color:#F47820;">the Reservation tab on our website or contact the artist directly.</span>
+                <br><br>
+                Once you reach out, we will confirm your desired design, size, placement, and preferred date. After the consultation, we will provide payment instructions for the booking deposit.
+                </p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- FAQ 1-2 -->
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+            <span class="q-text">Do you require a deposit? <br> What is your refund policy?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-2" role="region">
+            <div class="faq-a-inner">
+              <p>A deposit is required to secure your appointment.
+                Deposits are non-refundable in case of a client’s change of mind. 
+                <br><br>
+                However, if the artist is unable to proceed due to personal circumstances, the deposit will be fully refunded.</p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- FAQ 1-3-->
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3">
+            <span class="q-text">Do you accept walk-ins?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-3" role="region">
+            <div class="faq-a-inner">
+              <p>Yes, we do. 
+                <br><br>
+                It maybe helpful to check in beforehand by the Reservation tab, DM, or call. 
+                <br>
+                <span style="font-weight:600;color:#F47820;">
+                    But, 99% of the time we are here :&#41;
+                </span>
+                </p>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size: 18px; padding: 1em 0 10px 3px; font-weight:600; color:#F47820;">Before Your Appointment</p>
+        <!-- FAQ 2-1 -->
+        <div class="faq-item" id="faq-aftercare">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+            <span class="q-text">Are there any precautions I should take before getting a tattoo?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-aftercare">
+            <div class="faq-a-inner">
+              <p>Please avoid excessive drinking or intense exercise the day before your session.
+                <span style="font-weight:600;color:#F47820;">
+                    Keep the tattoo area clean and, if possible, shave the area in advance.
+                </span>
+                    <br><br>
+                If your skin has wounds, rashes, severe dryness, or sunburn, the session may not be possible. 
+                We recommend waiting until your skin has fully healed.</p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- FAQ 2-2 -->
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+            <span class="q-text">How does a consultation for a custom design work?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-2" role="region">
+            <div class="faq-a-inner">
+              <p>Artists will create a design based on inspiration pictures and keywords that you send. Adjustments can be made to suit the artists' style.
+            </p>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size: 18px; padding: 1em 0 10px 3px; font-weight:600; color:#F47820;">Tattoo Procedure</p>
+        <!-- FAQ 3-1 -->
+        <div class="faq-item" id="faq-aftercare">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1">
+            <span class="q-text">How long does a tattoo session take?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-aftercare">
+            <div class="faq-a-inner">
+              <p>This depends on the size and detail of the design.
+                <br><br>
+                Small tattoos typically take about 1–2 hours, while medium to large pieces may take several hours. 
+                <br><br>
+                Please consult with your artist for a more accurate estimate.</p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- FAQ 3-2 -->
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2">
+            <span class="q-text">Do you use numbing cream?</span>
+            <span class="q-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-2" role="region">
+            <div class="faq-a-inner">
+              <p>Our studio does not use numbing cream. 
+                <br><br>
+                While it may help reduce discomfort, it does not provide complete pain relief. 
+                <br>
+                Our artists prioritize your comfort, taking breaks as needed to ensure the best experience.</p>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+      <script>
+        function setHeight(el, to) {
+          el.style.height = to + "px";
+        }
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+          const btn = item.querySelector('.faq-q');
+          const panel = item.querySelector('.faq-a');
+      
+          setHeight(panel, 0);
+      
+          btn.addEventListener('click', () => {
+            const isOpen = item.classList.contains('open');
+      
+            document.querySelectorAll('.faq-item.open').forEach(openItem => {
+              if (openItem !== item) {
+                const openPanel = openItem.querySelector('.faq-a');
+                openItem.classList.remove('open');
+                openItem.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+                setHeight(openPanel, 0);
+              }
+            });
+      
+            
+            if (!isOpen) {
+              item.classList.add('open');
+              btn.setAttribute('aria-expanded', 'true');
+            
+              const inner = panel.querySelector('.faq-a-inner');
+              setHeight(panel, inner.scrollHeight);
+            } else {
+              item.classList.remove('open');
+              btn.setAttribute('aria-expanded', 'false');
+              setHeight(panel, 0);
+            }
+          });
+      
+      
+          window.addEventListener('resize', () => {
+            if (item.classList.contains('open')) {
+              const inner = panel.querySelector('.faq-a-inner');
+              setHeight(panel, inner.scrollHeight);
+            }
+          });
+        });
+      </script>
+      
+
+</body>
+</html>
