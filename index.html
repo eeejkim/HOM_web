@@ -673,9 +673,11 @@
       <p>2F, 14, Seogang-ro 9-gil, Mapo-gu, Seoul</p>
       <br>
       <p>houseofmottle@gmail.com</p>
-      <p></p>
       <div class="googlemap">Show on Google Map</div>
       <div class="backtotop">BACK TO TOP</div>
+      <p id="visitLine" class="visit-line">
+        Today <span id="visitToday">--</span>, Total <span id="visitTotal">--</span>
+      </p>
     </div>
   </div>
 
@@ -704,6 +706,32 @@
       behavior: 'smooth'
     });
   });
+
+  const VISIT_API = "https://script.google.com/macros/s/AKfycbz4SurhOJikhATK-wIVi05XCOMcEUFp2SaFi3Vnyl5yo2igAjoRs7QCMxPh5oreq0Y/exec";
+
+/* 세션 중복 증가 방지: 한 브라우저 탭/세션에서 1회만 증가 */
+async function updateVisitors(){
+  try{
+    // 최초 방문(세션) 1회만 증가
+    if(!sessionStorage.getItem("visitCounted")){
+      await fetch(VISIT_API + "?action=inc", { method:"POST", mode:"cors" });
+      sessionStorage.setItem("visitCounted","1");
+    }
+    // 현재 값 조회
+    const res = await fetch(VISIT_API + "?action=get", { mode:"cors" });
+    const data = await res.json();
+    const today = (data && typeof data.today === "number") ? data.today : null;
+    const total = (data && typeof data.total === "number") ? data.total : null;
+
+    document.getElementById("visitToday").textContent = today !== null ? today.toLocaleString() : "N/A";
+    document.getElementById("visitTotal").textContent = total !== null ? total.toLocaleString() : "N/A";
+  }catch(err){
+    console.error(err);
+    document.getElementById("visitToday").textContent = "N/A";
+    document.getElementById("visitTotal").textContent = "N/A";
+  }
+}
+document.addEventListener("DOMContentLoaded", updateVisitors);
 
   </script>
 
