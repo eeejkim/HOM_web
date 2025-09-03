@@ -7,128 +7,80 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-<style>
-   html,
-    body {
-        margin: 0;
-        padding: 0;
-        font-size: 15px;
-        font-family: "Lexend", sans-serif;
-        scroll-behavior: smooth;
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-size: 15px;
+      font-family: "Lexend", sans-serif;
+      scroll-behavior: smooth;
     }
 
     .lexend {
-        font-family: "Lexend", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 100,200,300,400,500,600,700,800,900;
-        font-style: normal;
-      }
-    
+      font-family: "Lexend", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 100,200,300,400,500,600,700,800,900;
+      font-style: normal;
+    }
+
     /* 배경 이미지 슬라이드쇼 */
     .background-slideshow {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: -1;
-        overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
     }
 
     .background-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
 
-    .background-slide.active {
-        opacity: 1;
-    }
+    .background-slide.active { opacity: 1; }
 
-    .background-slide:nth-child(1) {
-        background-image: url('resource/bg1.jpg');
-    }
-    .background-slide:nth-child(2) {
-        background-image: url('resource/bg2.jpg');
-    }
-    .background-slide:nth-child(3) {
-        background-image: url('resource/bg3.jpg');
-    }
-    .background-slide:nth-child(4) {
-        background-image: url('resource/bg4.jpg');
-    }
-    .background-slide:nth-child(5) {
-        background-image: url('resource/bg5.jpg');
-    }
-    .background-slide:nth-child(6) {
-        background-image: url('resource/bg6.jpg');
-    }
-    .background-slide:nth-child(7) {
-        background-image: url('resource/bg7.jpg');
-    }
-    .background-slide:nth-child(8) {
-        background-image: url('resource/bg8.jpg');
-    }
-    .background-slide:nth-child(9) {
-        background-image: url('resource/bg9.jpg');
-    }
-    .background-slide:nth-child(10) {
-        background-image: url('resource/bg10.jpg');
-    }
-    .background-slide:nth-child(11) {
-        background-image: url('resource/bg11.jpg');
-    }
-    .background-slide:nth-child(12) {
-        background-image: url('resource/bg12.jpg');
-    }
-    .background-slide:nth-child(13) {
-        background-image: url('resource/bg13.jpg');
-    }
-    .background-slide:nth-child(14) {
-        background-image: url('resource/bg14.jpg');
-    }
-    .background-slide:nth-child(15) {
-        background-image: url('resource/bg15.jpg');
-    }
-    .background-slide:nth-child(16) {
-        background-image: url('resource/bg16.jpg');
-    }
-    .background-slide:nth-child(17) {
-        background-image: url('resource/bg17.jpg');
-    }
-
-    
+    .background-slide:nth-child(1) { background-image: url('resource/bg1.jpg'); }
+    .background-slide:nth-child(2) { background-image: url('resource/bg2.jpg'); }
+    .background-slide:nth-child(3) { background-image: url('resource/bg3.jpg'); }
+    .background-slide:nth-child(4) { background-image: url('resource/bg4.jpg'); }
+    .background-slide:nth-child(5) { background-image: url('resource/bg5.jpg'); }
+    .background-slide:nth-child(6) { background-image: url('resource/bg6.jpg'); }
+    .background-slide:nth-child(7) { background-image: url('resource/bg7.jpg'); }
+    .background-slide:nth-child(8) { background-image: url('resource/bg8.jpg'); }
+    .background-slide:nth-child(9) { background-image: url('resource/bg9.jpg'); }
+    .background-slide:nth-child(10) { background-image: url('resource/bg10.jpg'); }
+    .background-slide:nth-child(11) { background-image: url('resource/bg11.jpg'); }
+    .background-slide:nth-child(12) { background-image: url('resource/bg12.jpg'); }
+    .background-slide:nth-child(13) { background-image: url('resource/bg13.jpg'); }
+    .background-slide:nth-child(14) { background-image: url('resource/bg14.jpg'); }
+    .background-slide:nth-child(15) { background-image: url('resource/bg15.jpg'); }
+    .background-slide:nth-child(16) { background-image: url('resource/bg16.jpg'); }
+    .background-slide:nth-child(17) { background-image: url('resource/bg17.jpg'); }
 
     .background-slideshow::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-        pointer-events: none;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+      pointer-events: none;
     }
 
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    p {
-        margin: 0;
-        padding: 0;
-        word-break: keep-all;
-    }
+    a { text-decoration: none; color: inherit; }
+    p { margin: 0; padding: 0; word-break: keep-all; }
 
     /* HEADER */
     .header {
@@ -234,35 +186,36 @@
 
     :root { --sidebar-w: 180px; }
 
-    .sidebar{
-      width: var(--sidebar-w) !important;
-      box-sizing: border-box !important;
-      padding: 0.8em 1em;
-      position: fixed;
-      top: 0;
-      bottom: 0; 
-      right: calc(-1 * var(--sidebar-w));  /* 기본: 화면 밖으로 숨김 */
-      background: #F47820;
-      color: #fff;
-      z-index: 99999;
-      transition: right .35s ease;
-    }
-    
-    input#menuicon:checked ~ .sidebar{
-      right: 0 !important;
-    }
-    
-    input#menuicon:checked ~ .header .menu-label{
-      position: fixed;
-      right: calc(var(--sidebar-w) + 5px) !important;
-      top: 1.5em;
-      z-index: 2002;
-    }
-    
-    @supports (height: 100dvh){
-      .sidebar{ min-height: 100dvh; }
-    }
-    
+.sidebar{
+  width: var(--sidebar-w) !important;
+  box-sizing: border-box !important;
+  padding: 0.8em 1em;
+  position: fixed;
+  top: 0;
+  bottom: 0; 
+  right: calc(-1 * var(--sidebar-w));  /* 기본: 화면 밖으로 숨김 */
+  background: #F47820;
+  color: #fff;
+  z-index: 99999;
+  transition: right .35s ease;
+}
+
+input#menuicon:checked ~ .sidebar{
+  right: 0 !important;
+}
+
+input#menuicon:checked ~ .header .menu-label{
+  position: fixed;
+  right: calc(var(--sidebar-w) + 5px) !important;
+  top: 1.5em;
+  z-index: 2002;
+}
+
+@supports (height: 100dvh){
+  .sidebar{ min-height: 100dvh; }
+}
+
+
     .sidebar ul {
         list-style: none;
         padding: 0;
@@ -280,185 +233,121 @@
         pointer-events: auto;
         z-index: 100000;
     }
-
     /* 콘텐츠 */
     .content1 {
-        height: 100vh;
-        padding: 5em 1.5em 3em;
-        /*text-align: center;*/
-        z-index: 2;
+      height: 100vh;
+      padding: 5em 1.5em 3em;
+      z-index: 2;
     }
 
-    .title-1 {
-        padding-bottom: 1em;
-    }
     .title-1 p {
-        font-size: 48px;
-        line-height: 0.9;
-        font-family: "Lexend", sans-serif;
-        font-weight: 700;
-        color: #F47820;
-        margin: 0.2em 0;
+      font-size: 48px;
+      line-height: 0.9;
+      font-weight: 700;
+      color: #F47820;
+      margin: 0.2em 0;
     }
-
-    .title p {
-        font-size: 12px;
-        font-weight: 400;
-        color: white;
-        line-height: 1.6;
-        padding-left: 5px;
-    }
+    .title p { font-size: 12px; color: white; line-height: 1.6; padding-left: 5px; }
 
     .button {
-        position: absolute;
-        bottom: 80px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;               /* 버튼들을 flex로 정렬 */
-        flex-direction: column;      /* 세로 방향 정렬 */
-        gap: 1em;                    /* 버튼 사이 간격 */
-        width: 80%;
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      width: 80%;
     }
-
-
     .button a {
-        display: flex;
-        justify-content: center; 
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        padding: 1em;
-        transition: all 0.2s ease;
-        min-height: 35px;
+      display: flex; justify-content: center; align-items: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      padding: 1em;
+      min-height: 35px;
     }
-
-    .button p {
-        font-size: 18px;
-        text-align: center;
-        color: #ffffff;
-        font-weight: 400;
-    }
-
-    .button a:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
-    }
+    .button p { font-size: 18px; color: #fff; font-weight: 400; }
 
     .scroll-down {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content-wrap {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 100%);
+      position: relative;
+      z-index: 3;
     }
 
     .content2 {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 100%);
-        min-height: 100vh;
-        height: auto;
-        padding: 4em 1.5em;
-        /*display: flex;*/
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 3;
+      min-height: 100vh;
+      padding: 4em 1.5em;
     }
-
     .content2 h1 {
-        font-size: clamp(2rem, 9vw, 6rem);
-        font-family: "Lexend", sans-serif;
-        font-weight: 600;
-        color: #F47820;
-        margin: 0.2em 0 2em 0;
+      font-size: clamp(2rem, 9vw, 6rem);
+      font-weight: 600;
+      color: #F47820;
+      margin: 0.2em 0 2em 0;
     }
 
     .artist-box {
-        position: relative;
-        height: 270px;
-        display: grid;
-        grid-template-columns: 50% 50%;
-        margin-bottom: 2em;
+      position: relative;
+      height: 270px;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-bottom: 2em;
     }
-
     .artist-left {
-        height: 250px;
-        background-color: #ffffff40;
-        padding: 10px;
+      height: 250px;
+      background-color: #ffffff40;
+      padding: 10px;
     }
-
     .artist-right img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
     }
-
-    .box-name {
-        font-size: 25px;
-        font-weight: 500;
-        color: white;
-    }
-
-    .box-type {
-        color: white;
-        padding-left: 2px;
-        font-size: 13px;
-    }
-
+    .box-name { font-size: 25px; font-weight: 500; color: white; }
+    .box-type { color: white; font-size: 13px; }
     .box-style {
-        position: absolute;
-        bottom: 10px;
-        color: white;
-        padding-left: 2px;
-        line-height: 1.4;
-        font-weight: 200;
-        font-size: 13px;
+      position: absolute;
+      bottom: 10px;
+      color: white;
+      line-height: 1.4;
+      font-weight: 200;
+      font-size: 13px;
     }
 
     .content3 {
-        padding-top: 3em;
-        color: white;
+      padding: 3em 1.5em;
+      color: white;
     }
-
-
     .googlemap, .backtotop {
-        border-width: 1px;
-        border-color: white;
-        border-style: solid;
-        padding: 1em;
-        margin: 1em 0;
-        text-align: center;
+      border: 1px solid white;
+      padding: 1em;
+      margin: 1em 0;
+      text-align: center;
     }
-</style>
-
+  </style>
 </head>
 
 <body>
-
-  <!-- 햄버거 메뉴 체크박스를 맨 위로 이동 -->
   <input type="checkbox" id="menuicon" hidden>
-
-  <!-- 헤더 -->
   <div class="header">
-    <div class="r-header">
-      <a href="index.html"><img src="resource/logo.png"></a>
-    </div>
+    <div class="r-header"><a href="index.html"><img src="resource/logo.png"></a></div>
     <div class="l-header">
       <p>MENU</p>
-      <label for="menuicon" class="menu-label">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
+      <label for="menuicon" class="menu-label"><span></span><span></span><span></span></label>
     </div>
   </div>
 
-  <!-- 사이드바 -->
   <div class="sidebar">
     <ul>
       <li><a href="about.html">ABOUT</a></li>
@@ -468,221 +357,44 @@
     </ul>
   </div>
 
-  <!-- 본문 -->
+  <!-- Content1 -->
   <div class="content1">
-    
-    <!-- 배경 이미지 슬라이드쇼 -->
     <div class="background-slideshow">
-    <div class="background-slide active"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
-    <div class="background-slide"></div>
+      <div class="background-slide active"></div>
+      <div class="background-slide"></div>
+      <div class="background-slide"></div>
+      <div class="background-slide"></div>
+      <div class="background-slide"></div>
     </div>
-    
-  
-    <div class="title-1">
-      <p>HOUSE</p>
-      <p>OF</p>
-      <p>MOTTLE</p>
-    </div>
-    <div class="title">
-      <p>TATTOO STUDIO</p>
-      <p>BASED IN KOREA</p>
-      <p>2F, 14, Seogang-ro 9-gil, Mapo-gu, Seoul</p>
-    </div>
-
+    <div class="title-1"><p>HOUSE</p><p>OF</p><p>MOTTLE</p></div>
+    <div class="title"><p>TATTOO STUDIO</p><p>BASED IN KOREA</p><p>2F, 14, Seogang-ro 9-gil, Mapo-gu, Seoul</p></div>
     <div class="button">
       <a href="about.html"><p>ABOUT US</p></a>
       <a href="reservation.html"><p>Reservation/Walk ins</p></a>
     </div>
-    
     <a href="#content2" class="scroll-down" aria-label="Scroll Down">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="6 9 12 15 18 9" />
-      </svg>
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </a>
   </div>
 
-  <div class="content2" id="content2">
-    <h1>Artists</h1>
-    
-    <div class="artist-list">
-      
-      <a href="Artist.html#artist-1">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">EVEN</p>
-          <p class="box-type">Owner</p>
-            <div class="box-style">
-            Black and Grey
-            <br>
-            Geometric
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-even-1.jpg">
-        </div>
-      </div>
-    </a>
-
-    <a href="Artist.html#artist-2">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">MOONY</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Color Illustration
-              <br>
-              Micro Realism
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-moony-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-3">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">MIDAM</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Black and Grey
-              <br>
-              Micro Realism
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-midam-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-4">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">EJ</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Oriental 
-              <br>
-              Black and Grey
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-ej-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-5">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">BLAIRE</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Vintage
-              <br>
-              Black and Grey
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-blaire-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-6">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">SERAPH</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Black and Grey
-              <br>
-              Geometric
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-seraph-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-7">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">KAMO</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              X-ray
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-kamo-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-8">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">CHAMSAE</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Black work
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-chamsae-1.jpg">
-        </div>
-      </div>
-    </a>
-
-      <a href="Artist.html#artist-9">
-      <div class="artist-box">
-        <div class="artist-left">
-          <p class="box-name">JOOIN</p>
-          <p class="box-type">Resident</p>
-            <div class="box-style">
-              Black and Grey
-            </div>
-        </div>
-        <div class="artist-right">
-          <img src="resource/a-jooin-1.jpg">
-        </div>
+  <!-- Content2 + Content3 in one wrapper -->
+  <div class="content-wrap">
+    <div class="content2" id="content2">
+      <h1>Artists</h1>
+      <div class="artist-list">
+        <!-- artist-box들 반복 -->
+        <a href="Artist.html#artist-1"><div class="artist-box"><div class="artist-left"><p class="box-name">EVEN</p><p class="box-type">Owner</p><div class="box-style">Black and Grey<br>Geometric</div></div><div class="artist-right"><img src="resource/a-even-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-2"><div class="artist-box"><div class="artist-left"><p class="box-name">MOONY</p><p class="box-type">Resident</p><div class="box-style">Color Illustration<br>Micro Realism</div></div><div class="artist-right"><img src="resource/a-moony-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-3"><div class="artist-box"><div class="artist-left"><p class="box-name">MIDAM</p><p class="box-type">Resident</p><div class="box-style">Black and Grey<br>Micro Realism</div></div><div class="artist-right"><img src="resource/a-midam-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-4"><div class="artist-box"><div class="artist-left"><p class="box-name">EJ</p><p class="box-type">Resident</p><div class="box-style">Oriental<br>Black and Grey</div></div><div class="artist-right"><img src="resource/a-ej-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-5"><div class="artist-box"><div class="artist-left"><p class="box-name">BLAIRE</p><p class="box-type">Resident</p><div class="box-style">Vintage<br>Black and Grey</div></div><div class="artist-right"><img src="resource/a-blaire-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-6"><div class="artist-box"><div class="artist-left"><p class="box-name">SERAPH</p><p class="box-type">Resident</p><div class="box-style">Black and Grey<br>Geometric</div></div><div class="artist-right"><img src="resource/a-seraph-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-7"><div class="artist-box"><div class="artist-left"><p class="box-name">KAMO</p><p class="box-type">Resident</p><div class="box-style">X-ray</div></div><div class="artist-right"><img src="resource/a-kamo-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-8"><div class="artist-box"><div class="artist-left"><p class="box-name">CHAMSAE</p><p class="box-type">Resident</p><div class="box-style">Black work</div></div><div class="artist-right"><img src="resource/a-chamsae-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-9"><div class="artist-box"><div class="artist-left"><p class="box-name">JOOIN</p><p class="box-type">Resident</p><div class="box-style">Black and Grey</div></div><div class="artist-right"><img src="resource/a-jooin-1.jpg"></div></div></a>
+        <a href="Artist.html#artist-10"><div class="artist-box"><div class="artist-left"><p class="box-name">ARDOR</p><p class="box-type">Resident</p><div class="box-style">Black and Grey</div></div><div class="artist-right"><img src="resource/a-ardor-1.jpg"></div></div></a>
       </div>
     </div>
-  </a>
-
-  <a href="Artist.html#artist-10">
-    <div class="artist-box">
-      <div class="artist-left">
-        <p class="box-name">ARDOR</p>
-        <p class="box-type">Resident</p>
-          <div class="box-style">
-            Black and Grey
-          </div>
-      </div>
-      <div class="artist-right">
-        <img src="resource/a-ardor-1.jpg">
-      </div>
-    </div>
-  </div>
-</a>
 
     <div class="content3">
       <p>HOUSE OF MOTTLE</p>
@@ -691,39 +403,29 @@
       <p>houseofmottle@gmail.com</p>
       <div class="googlemap">Show on Google Map</div>
       <div class="backtotop">BACK TO TOP</div>
-      <p id="visitLine" class="visit-line">
-        Today <span id="visitToday">--</span>, Total <span id="visitTotal">--</span>
-      </p>
+      <p id="visitLine">Today <span id="visitToday">--</span>, Total <span id="visitTotal">--</span></p>
     </div>
   </div>
 
   <script>
-    // 배경 이미지 슬라이드쇼
+    // 슬라이드쇼
     const slides = document.querySelectorAll('.background-slide');
     let currentSlide = 0;
-
-    function nextSlide() {
+    setInterval(() => {
       slides[currentSlide].classList.remove('active');
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
-    }
+    }, 3000);
 
-    // 3초마다 이미지 변경
-    setInterval(nextSlide, 3000);
-
-    document.querySelector('.googlemap').addEventListener('click', function () {
-    window.open('https://maps.app.goo.gl/J4dStJip2D6ZPw528', '_blank');
-  });
-
-  //backtotop
-    document.querySelector('.backtotop').addEventListener('click', function () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+    document.querySelector('.googlemap').addEventListener('click', () => {
+      window.open('https://maps.app.goo.gl/J4dStJip2D6ZPw528', '_blank');
     });
-  });
+    document.querySelector('.backtotop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-  const VISIT_API = "https://script.google.com/macros/s/AKfycbwIk6m3fWVVnLNFQ8HO1kmvtur9jGrVj9aznDy5NMATsKNB11kNFy-fDXfvNwz4lQU/exec";
+    const VISIT_API
+ = "https://script.google.com/macros/s/AKfycbwIk6m3fWVVnLNFQ8HO1kmvtur9jGrVj9aznDy5NMATsKNB11kNFy-fDXfvNwz4lQU/exec";
 
 /* 세션 중복 증가 방지: 한 브라우저 탭/세션에서 1회만 증가 */
 async function updateVisitors(){
